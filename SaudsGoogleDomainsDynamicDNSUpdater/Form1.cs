@@ -14,9 +14,16 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
 {
     public partial class Form1 : Form
     {
+        private static readonly Timer Timer = new Timer();
         public Form1()
         {
             InitializeComponent();
+
+            username.Text = Properties.Settings.Default.usernamesave;
+            password.Text = Properties.Settings.Default.passwordsave;
+            subdomain.Text = Properties.Settings.Default.subdomainsave;
+            interval.Text = Properties.Settings.Default.intervalsave;
+
             MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.SizeGripStyle = SizeGripStyle.Hide;
@@ -25,6 +32,8 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
 
             // When tray icon clicked, trigger window state change.       
             notifyIcon1.Click += ToggleMinimizeState;
+
+            CallDDNS();
 
 
         }
@@ -67,8 +76,10 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
                 interval.Focus();
                 return;
             }
-
+            Timer.Stop();
+            CallDDNSOnce();
             CallDDNS();
+            
 
             Properties.Settings.Default.usernamesave = username.Text;
             Properties.Settings.Default.passwordsave = password.Text;
@@ -84,12 +95,7 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
             subdomain.Text = Properties.Settings.Default.subdomainsave;
             interval.Text = Properties.Settings.Default.intervalsave;
 
-            CallDDNS();
-        }
-
-        private void MyTimer_Tick(object sender, EventArgs e)
-        {
-            CallDDNS();
+            
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -115,14 +121,9 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
             //if (isMinimized) notifyIcon1.ShowBalloonTip(100, "Saud's Google Domains Dynamic DNS Updater", "Application minimized to tray.", ToolTipIcon.Info);
         }
 
-        private void CallDDNS()
+        private void CallDDNSOnce()
         {
-            System.Windows.Forms.Timer MyTimer = new System.Windows.Forms.Timer();
-            int intervaldigit = Convert.ToInt32(interval.Text);
-            MyTimer.Interval = (intervaldigit * 60000); // 45 mins
-            MyTimer.Tick += new EventHandler(MyTimer_Tick);
-            MyTimer.Start();
-
+            // Timer
             try
             {
                 var client = new WebClient { Credentials = new NetworkCredential(username.Text, password.Text) };
@@ -140,6 +141,44 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
                     //notifyIcon1.Text = "Status: Connection Failed" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
                 }
             }
+            int intervaldigit = Convert.ToInt32(interval.Text);
+            Timer.Tick += TimerEventProcessor;
+            Timer.Interval = (intervaldigit * 60000);
+            Timer.Start();
+        }
+
+        private void CallDDNS()
+        {
+            // Timer
+            int intervaldigit = Convert.ToInt32(interval.Text);
+            Timer.Tick += TimerEventProcessor;
+            Timer.Interval = (intervaldigit * 60000);
+            Timer.Start();
+        }
+
+        private void TimerEventProcessor(object myObject, EventArgs myEventArgs)
+        {
+            //Timer.Stop();
+            //CallDDNS();
+            try
+            {
+                var client = new WebClient { Credentials = new NetworkCredential(username.Text, password.Text) };
+                var response = client.DownloadString("https://domains.google.com/nic/update?hostname=" + subdomain.Text);
+                //MessageBox.Show(response);
+                toolStripStatusLabel2.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm:ss tt");
+                //notifyIcon1.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
+                //responseddns.Content = response;
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ReceiveFailure || ex.Status == WebExceptionStatus.ConnectFailure || ex.Status == WebExceptionStatus.KeepAliveFailure)
+                {
+                    toolStripStatusLabel2.Text = "Status: Connection Failed" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm:ss tt");
+                    //notifyIcon1.Text = "Status: Connection Failed" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
+                }
+            }
+
+            //Timer.Start();
         }
     }
 }
