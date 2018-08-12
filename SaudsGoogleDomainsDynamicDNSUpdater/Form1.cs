@@ -128,7 +128,7 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
                 var client = new WebClient { Credentials = new NetworkCredential(username.Text, password.Text) };
                 var response = client.DownloadString("https://domains.google.com/nic/update?hostname=" + subdomain.Text);
                 //MessageBox.Show(response);
-                toolStripStatusLabel2.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd HH:mm:ss tt");
+                toolStripStatusLabel2.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm:ss tt");
                 //notifyIcon1.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
                 //responseddns.Content = response;
             }
@@ -136,7 +136,7 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
             {
                 if (ex.Status == WebExceptionStatus.ReceiveFailure || ex.Status == WebExceptionStatus.ConnectFailure || ex.Status == WebExceptionStatus.KeepAliveFailure)
                 {
-                    toolStripStatusLabel2.Text = "Status: Connection Failed" + DateTime.Now.ToString(" - yyyy-MM-dd HH:mm:ss tt");
+                    toolStripStatusLabel2.Text = "Status: Connection Failed" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm:ss tt");
                     //notifyIcon1.Text = "Status: Connection Failed" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
                 }
             }
