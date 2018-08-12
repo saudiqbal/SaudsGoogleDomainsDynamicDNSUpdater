@@ -25,6 +25,8 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
 
             // When tray icon clicked, trigger window state change.       
             notifyIcon1.Click += ToggleMinimizeState;
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -66,21 +68,7 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
                 return;
             }
 
-            try
-            {
-                var client = new WebClient { Credentials = new NetworkCredential(username.Text, password.Text) };
-                var response = client.DownloadString("https://domains.google.com/nic/update?hostname=" + subdomain.Text);
-                //MessageBox.Show(response);
-                toolStripStatusLabel2.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
-                //responseddns.Content = response;
-            }
-            catch (WebException ex)
-            {
-                if (ex.Status == WebExceptionStatus.ReceiveFailure || ex.Status == WebExceptionStatus.ConnectFailure || ex.Status == WebExceptionStatus.KeepAliveFailure)
-                {
-                    toolStripStatusLabel2.Text = "Status: Connection Failed" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
-                }
-            }
+            CallDDNS();
 
             Properties.Settings.Default.usernamesave = username.Text;
             Properties.Settings.Default.passwordsave = password.Text;
@@ -96,36 +84,17 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
             subdomain.Text = Properties.Settings.Default.subdomainsave;
             interval.Text = Properties.Settings.Default.intervalsave;
 
-
-            System.Windows.Forms.Timer MyTimer = new System.Windows.Forms.Timer();
-            int intervaldigit = Convert.ToInt32(interval.Text);
-            MyTimer.Interval = (intervaldigit * 60000); // 45 mins
-            MyTimer.Tick += new EventHandler(MyTimer_Tick);
-            MyTimer.Start();
+            CallDDNS();
         }
 
         private void MyTimer_Tick(object sender, EventArgs e)
         {
-            try
-            {
-                var client = new WebClient { Credentials = new NetworkCredential(username.Text, password.Text) };
-                var response = client.DownloadString("https://domains.google.com/nic/update?hostname=" + subdomain.Text);
-                //MessageBox.Show(response);
-                toolStripStatusLabel2.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
-                //responseddns.Content = response;
-            }
-            catch (WebException ex)
-            {
-                if (ex.Status == WebExceptionStatus.ReceiveFailure || ex.Status == WebExceptionStatus.ConnectFailure || ex.Status == WebExceptionStatus.KeepAliveFailure)
-                {
-                    toolStripStatusLabel2.Text = "Status: Connection Failed" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
-                }
-            }
+            CallDDNS();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProcessStartInfo sInfo = new ProcessStartInfo("http://www.saudiqbal.com");
+            ProcessStartInfo sInfo = new ProcessStartInfo("http://www.saudiqbal.com/goto.php?link=21");
             Process.Start(sInfo);
         }
 
@@ -144,6 +113,33 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
             this.ShowInTaskbar = !isMinimized;
             notifyIcon1.Visible = isMinimized;
             //if (isMinimized) notifyIcon1.ShowBalloonTip(100, "Saud's Google Domains Dynamic DNS Updater", "Application minimized to tray.", ToolTipIcon.Info);
+        }
+
+        private void CallDDNS()
+        {
+            System.Windows.Forms.Timer MyTimer = new System.Windows.Forms.Timer();
+            int intervaldigit = Convert.ToInt32(interval.Text);
+            MyTimer.Interval = (intervaldigit * 60000); // 45 mins
+            MyTimer.Tick += new EventHandler(MyTimer_Tick);
+            MyTimer.Start();
+
+            try
+            {
+                var client = new WebClient { Credentials = new NetworkCredential(username.Text, password.Text) };
+                var response = client.DownloadString("https://domains.google.com/nic/update?hostname=" + subdomain.Text);
+                //MessageBox.Show(response);
+                toolStripStatusLabel2.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
+                notifyIcon1.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
+                //responseddns.Content = response;
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ReceiveFailure || ex.Status == WebExceptionStatus.ConnectFailure || ex.Status == WebExceptionStatus.KeepAliveFailure)
+                {
+                    toolStripStatusLabel2.Text = "Status: Connection Failed" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
+                    notifyIcon1.Text = "Status: Connection Failed" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
+                }
+            }
         }
     }
 }

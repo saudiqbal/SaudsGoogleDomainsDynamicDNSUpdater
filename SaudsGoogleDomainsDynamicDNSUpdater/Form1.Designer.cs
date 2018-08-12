@@ -112,47 +112,47 @@
             this.username.Location = new System.Drawing.Point(132, 65);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(240, 20);
-            this.username.TabIndex = 5;
+            this.username.TabIndex = 1;
             // 
             // password
             // 
             this.password.Location = new System.Drawing.Point(132, 98);
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(240, 20);
-            this.password.TabIndex = 6;
+            this.password.TabIndex = 2;
             // 
             // subdomain
             // 
             this.subdomain.Location = new System.Drawing.Point(132, 129);
             this.subdomain.Name = "subdomain";
             this.subdomain.Size = new System.Drawing.Size(240, 20);
-            this.subdomain.TabIndex = 7;
+            this.subdomain.TabIndex = 3;
             // 
             // interval
             // 
             this.interval.Location = new System.Drawing.Point(132, 161);
             this.interval.Name = "interval";
             this.interval.Size = new System.Drawing.Size(118, 20);
-            this.interval.TabIndex = 8;
+            this.interval.TabIndex = 4;
             this.interval.Text = "60";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(488, 153);
+            this.button1.Location = new System.Drawing.Point(486, 158);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Add";
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Set";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(323, 207);
+            this.linkLabel1.Location = new System.Drawing.Point(270, 217);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(133, 13);
-            this.linkLabel1.TabIndex = 10;
+            this.linkLabel1.TabIndex = 6;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "http://www.saudiqbal.com";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -170,7 +170,6 @@
             // 
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Maximize";
-            this.notifyIcon1.Visible = true;
             // 
             // Form1
             // 
