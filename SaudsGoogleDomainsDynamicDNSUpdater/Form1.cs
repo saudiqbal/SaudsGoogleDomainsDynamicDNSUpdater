@@ -76,9 +76,9 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
                 interval.Focus();
                 return;
             }
-            Timer.Stop();
+            //Timer.Stop();
             CallDDNSOnce();
-            CallDDNS();
+            //CallDDNS();
             
 
             Properties.Settings.Default.usernamesave = username.Text;
@@ -123,7 +123,7 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
 
         private void CallDDNSOnce()
         {
-            // Timer
+            Timer.Stop();
             try
             {
                 var client = new WebClient { Credentials = new NetworkCredential(username.Text, password.Text) };
@@ -131,6 +131,7 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
                 //MessageBox.Show(response);
                 toolStripStatusLabel2.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm:ss tt");
                 //notifyIcon1.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
+                notifyIcon1.Text = "Last Update" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm:ss tt");
                 //responseddns.Content = response;
             }
             catch (WebException ex)
@@ -149,7 +150,7 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
 
         private void CallDDNS()
         {
-            // Timer
+            Timer.Stop();
             int intervaldigit = Convert.ToInt32(interval.Text);
             Timer.Tick += TimerEventProcessor;
             Timer.Interval = (intervaldigit * 60000);
@@ -167,6 +168,7 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
                 //MessageBox.Show(response);
                 toolStripStatusLabel2.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm:ss tt");
                 //notifyIcon1.Text = "Status: " + response + DateTime.Now.ToString(" - yyyy-MM-dd h:mm tt");
+                notifyIcon1.Text = "Last Update" + DateTime.Now.ToString(" - yyyy-MM-dd h:mm:ss tt");
                 //responseddns.Content = response;
             }
             catch (WebException ex)
