@@ -7,3 +7,5 @@ Tested with Windows Vista, 7, 8 and 10. Let me know if you find any bugs or any 
 Screenshot
 
 ![ScreenShot](http://www.saudiqbal.com/images/blog/SaudsGoogleDomainsDynamicDNSUpdater.png)
+
+Download from http://www.saudiqbal.com/blog/google-domains-dynamic-dns-updater-windows-client.php
