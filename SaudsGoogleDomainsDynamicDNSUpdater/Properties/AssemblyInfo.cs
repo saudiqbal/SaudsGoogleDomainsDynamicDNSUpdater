@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SaudsGoogleDomainsDynamicDNSUpdater")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Saud's Google Domains Dynamic DNS Updater")]
+[assembly: AssemblyDescription("I created a client to update your Google Domains Dynamic DNS. Feel free to download and try it. You can minimize the app to system tray and it will keep checking for updates in the background every few minutes defined by you. Works with both IPv4 and IPv6.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SaudsGoogleDomainsDynamicDNSUpdater")]
