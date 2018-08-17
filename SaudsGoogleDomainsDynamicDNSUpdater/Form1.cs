@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Diagnostics;
+using Microsoft.Win32;
+using System.Security.Principal;
 
 namespace SaudsGoogleDomainsDynamicDNSUpdater
 {
@@ -79,7 +81,7 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
             //Timer.Stop();
             CallDDNSOnce();
             //CallDDNS();
-            
+
 
             Properties.Settings.Default.usernamesave = username.Text;
             Properties.Settings.Default.passwordsave = password.Text;
@@ -95,7 +97,7 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
             subdomain.Text = Properties.Settings.Default.subdomainsave;
             interval.Text = Properties.Settings.Default.intervalsave;
 
-            
+
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -203,6 +205,91 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
         {
             ProcessStartInfo sInfo = new ProcessStartInfo("http://www.saudiqbal.com/goto.php?link=21");
             Process.Start(sInfo);
+        }
+
+        public class StartUpManager
+        {
+            public static void AddApplicationToCurrentUserStartup()
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+                {
+                    key.SetValue("SaudsGDDDNSUpdater", "\"" + System.Reflection.Assembly.GetExecutingAssembly().Location + "\" /StartMinimized");
+                }
+            }
+
+            public static void AddApplicationToAllUserStartup()
+            {
+                using (RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+                {
+                    key.SetValue("SaudsGDDDNSUpdater", "\"" + System.Reflection.Assembly.GetExecutingAssembly().Location + "\" /StartMinimized");
+                }
+            }
+
+            public static void RemoveApplicationFromCurrentUserStartup()
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+                {
+                    key.DeleteValue("SaudsGDDDNSUpdater", false);
+                }
+            }
+
+            public static void RemoveApplicationFromAllUserStartup()
+            {
+                using (RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+                {
+                    key.DeleteValue("SaudsGDDDNSUpdater", false);
+                }
+            }
+
+            public static bool IsUserAdministrator()
+            {
+                //bool value to hold our return value
+                bool isAdmin;
+                try
+                {
+                    //get the currently logged in user
+                    WindowsIdentity user = WindowsIdentity.GetCurrent();
+                    WindowsPrincipal principal = new WindowsPrincipal(user);
+                    isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    isAdmin = false;
+                }
+                catch (Exception ex)
+                {
+                    isAdmin = false;
+                }
+                return isAdmin;
+            }
+        }
+
+        private void enableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (StartUpManager.IsUserAdministrator())
+            {
+                // Will Add application to All Users StartUp
+                StartUpManager.AddApplicationToAllUserStartup();
+            }
+            else
+            {
+                // Will Add application to Current Users StartUp
+                StartUpManager.AddApplicationToCurrentUserStartup();
+            }
+        }
+
+        private void disableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (StartUpManager.IsUserAdministrator())
+            {
+                // Will Remove application to All Users StartUp
+                StartUpManager.RemoveApplicationFromAllUserStartup();
+            }
+            else
+            {
+                // Will Remove application to Current Users StartUp
+                StartUpManager.RemoveApplicationFromCurrentUserStartup();
+            }
         }
     }
 }
