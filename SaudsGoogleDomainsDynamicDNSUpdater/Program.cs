@@ -14,19 +14,25 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
         [STAThread]
         static void Main(string[] args)
         {
+            bool result;
+            var mutex = new System.Threading.Mutex(true, "f49da1b0-6675-4ecd-ad39-fd2172b545fc", out result);
+            if (!result)
+            {
+                MessageBox.Show("Another instance of DNS updater is already running.");
+                return;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form1 form1 = new Form1();
-            if (args.Length == 1 && (args[0] == "/StartMinimized" || args[0] == "-minimized"))
+            if (args.Length != 0)
             {
-                form1.Visible = true;
-                form1.WindowState = FormWindowState.Minimized;
+                Application.Run(new Form1(args[0]));
             }
-                //form1.WindowState = FormWindowState.Minimized;
-            //form1.Visible = true;
-            Application.Run(form1);
-            
-            //Application.Run(new Form1());
+            else
+            {
+                Application.Run(new Form1("normalState"));
+            }
+            GC.KeepAlive(mutex);
         }
     }
 }

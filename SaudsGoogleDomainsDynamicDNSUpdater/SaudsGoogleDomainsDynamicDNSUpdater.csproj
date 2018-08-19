@@ -23,7 +23,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <SupportUrl>http://www.saudiqbal.com/goto.php%3flink=21</SupportUrl>
-    <ApplicationRevision>21</ApplicationRevision>
+    <ApplicationRevision>33</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -112,6 +112,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -129,6 +130,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\level_down_16x16.gif" />
+    <None Include="Resources\computer1_16x16.gif" />
+    <None Include="Resources\add_16x16.gif" />
+    <None Include="Resources\delete_16x16.gif" />
+    <None Include="Resources\application_%28delete%29_16x16.gif" />
+    <None Include="Resources\home_16x16.gif" />
+    <None Include="Resources\help_16x16.gif" />
     <Content Include="small2_NIE_icon.ico" />
   </ItemGroup>
   <ItemGroup>

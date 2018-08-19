@@ -46,14 +46,14 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.minimizeToTrayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.homePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.minimizeToTrayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startWithWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.homePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -191,20 +191,6 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // minimizeToTrayToolStripMenuItem
-            // 
-            this.minimizeToTrayToolStripMenuItem.Name = "minimizeToTrayToolStripMenuItem";
-            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.minimizeToTrayToolStripMenuItem.Text = "Minimize to tray";
-            this.minimizeToTrayToolStripMenuItem.Click += new System.EventHandler(this.minimizeToTrayToolStripMenuItem_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -216,42 +202,63 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // homePageToolStripMenuItem
-            // 
-            this.homePageToolStripMenuItem.Name = "homePageToolStripMenuItem";
-            this.homePageToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.homePageToolStripMenuItem.Text = "Home Page";
-            this.homePageToolStripMenuItem.Click += new System.EventHandler(this.homePageToolStripMenuItem_Click);
-            // 
             // aboutToolStripMenuItem
             // 
+            this.aboutToolStripMenuItem.Image = global::SaudsGoogleDomainsDynamicDNSUpdater.Properties.Resources.help_16x16;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // minimizeToTrayToolStripMenuItem
+            // 
+            this.minimizeToTrayToolStripMenuItem.Image = global::SaudsGoogleDomainsDynamicDNSUpdater.Properties.Resources.level_down_16x16;
+            this.minimizeToTrayToolStripMenuItem.Name = "minimizeToTrayToolStripMenuItem";
+            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.minimizeToTrayToolStripMenuItem.Text = "Minimize to tray";
+            this.minimizeToTrayToolStripMenuItem.Click += new System.EventHandler(this.minimizeToTrayToolStripMenuItem_Click);
             // 
             // startWithWindowsToolStripMenuItem
             // 
             this.startWithWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.enableToolStripMenuItem,
             this.disableToolStripMenuItem});
+            this.startWithWindowsToolStripMenuItem.Image = global::SaudsGoogleDomainsDynamicDNSUpdater.Properties.Resources.computer1_16x16;
             this.startWithWindowsToolStripMenuItem.Name = "startWithWindowsToolStripMenuItem";
-            this.startWithWindowsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startWithWindowsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.startWithWindowsToolStripMenuItem.Text = "Start with Windows";
             // 
             // enableToolStripMenuItem
             // 
+            this.enableToolStripMenuItem.Image = global::SaudsGoogleDomainsDynamicDNSUpdater.Properties.Resources.add_16x16;
             this.enableToolStripMenuItem.Name = "enableToolStripMenuItem";
-            this.enableToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.enableToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.enableToolStripMenuItem.Text = "Enable";
             this.enableToolStripMenuItem.Click += new System.EventHandler(this.enableToolStripMenuItem_Click);
             // 
             // disableToolStripMenuItem
             // 
+            this.disableToolStripMenuItem.Image = global::SaudsGoogleDomainsDynamicDNSUpdater.Properties.Resources.delete_16x16;
             this.disableToolStripMenuItem.Name = "disableToolStripMenuItem";
-            this.disableToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disableToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.disableToolStripMenuItem.Text = "Disable";
             this.disableToolStripMenuItem.Click += new System.EventHandler(this.disableToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Image = global::SaudsGoogleDomainsDynamicDNSUpdater.Properties.Resources.application__delete__16x16;
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // homePageToolStripMenuItem
+            // 
+            this.homePageToolStripMenuItem.Image = global::SaudsGoogleDomainsDynamicDNSUpdater.Properties.Resources.home_16x16;
+            this.homePageToolStripMenuItem.Name = "homePageToolStripMenuItem";
+            this.homePageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.homePageToolStripMenuItem.Text = "Home Page";
+            this.homePageToolStripMenuItem.Click += new System.EventHandler(this.homePageToolStripMenuItem_Click);
             // 
             // Form1
             // 

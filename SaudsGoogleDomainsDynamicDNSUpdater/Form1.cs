@@ -17,28 +17,52 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
     public partial class Form1 : Form
     {
         private static readonly Timer Timer = new Timer();
-        public Form1()
-        {
-            InitializeComponent();
 
+        public Form1(string parameter)
+        {
+            //InitializeComponent();
+            //SetStartup(); //This function will set your app in the registry to run on startup. I'll explain this function below.
+            
+            InitializeComponent();
             username.Text = Properties.Settings.Default.usernamesave;
             password.Text = Properties.Settings.Default.passwordsave;
             subdomain.Text = Properties.Settings.Default.subdomainsave;
             interval.Text = Properties.Settings.Default.intervalsave;
-
             MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.SizeGripStyle = SizeGripStyle.Hide;
+
+            CallDDNS();
+
             // When window state changed, trigger state update.
             this.Resize += SetMinimizeState;
 
             // When tray icon clicked, trigger window state change.       
             notifyIcon1.Click += ToggleMinimizeState;
+            MinimizeApp(parameter);
+        }
 
-            CallDDNS();
+        public void MinimizeApp(string parameter)
+        {
 
+
+            if (parameter == "/StartMinimized")
+            {
+                notifyIcon1.Visible = true;
+                this.WindowState = FormWindowState.Minimized;
+                this.ShowInTaskbar = false;
+            }
+            else
+            {
+                notifyIcon1.Visible = false;
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
+            }
+
+            
 
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -291,5 +315,6 @@ namespace SaudsGoogleDomainsDynamicDNSUpdater
                 StartUpManager.RemoveApplicationFromCurrentUserStartup();
             }
         }
-    }
+            
+}
 }
