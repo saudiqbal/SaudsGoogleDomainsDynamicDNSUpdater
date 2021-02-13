@@ -8,7 +8,7 @@ Choosing between IPv4 or IPv4 for DDNS
 
 Default value of https://domains.google.com/checkip returns the default IP address that the computer is using which could be either IPv6 or IPv4. To force IPv4 or IPv6 use these values:
 
-IPv6 only: https://api64.ipify.org
+IPv6 only: 'https://api64.ipify.org'
 
 IPv4 only: https://api.ipify.org
 
