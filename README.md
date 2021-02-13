@@ -16,4 +16,10 @@ Screenshot
 
 ![ScreenShot](https://github.com/saudiqbal/SaudsGoogleDomainsDynamicDNSUpdater/blob/master/SaudsGoogleDomainsDynamicDNSUpdater.png?raw=true)
 
+License
+This utility is released as freeware. You are allowed to freely distribute this utility via floppy disk, CD-ROM, Internet, or in any other way, as long as you don't charge anything for this and you don't sell it or distribute it as a part of commercial product. If you distribute this utility, you must include all files in the distribution package, without any modification !
+
+Disclaimer
+The software is provided "AS IS" without any warranty, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose. The author will not be liable for any special, incidental, consequential or indirect damages due to loss of data or any other reason
+
 Download from http://www.saudiqbal.com/blog/google-domains-dynamic-dns-updater-windows-client.php
